@@ -80,9 +80,22 @@ The transformation is performed using a **Python-based ETL pipeline**, which inv
 - **Incremental Loading**: The ETL pipeline will load only new or updated records into the PostgreSQL database. This incremental approach helps in efficiently processing the data without redundant operations.
 
 ### Data Transformation Patterns:
-- **Cleaning**: Handling missing values and duplicates within the ETL pipeline.
-- **Aggregation**: Aggregating the data based on the required time intervals (daily, monthly).
-- **Feature Engineering**: Creating new columns based on the data, such as CO2 classifications.
+The transformation is performed using a **Python-based ETL pipeline**, which involves:
+### 1. Column Selection  
+- From the **CO2 emissions dataset**, only the following columns are retained:  
+  - `country`  
+  - `year`  
+  - `co2_per_capita`  
+- From the **Energy consumption dataset**, only the following columns are kept:  
+  - `country`  
+  - `year`  
+  - `energy_per_capita`  
+
+### 2. Merging Datasets  
+- The **CO2 emissions dataset** and the **Energy consumption dataset** are merged on `country` and `year` using an **inner join** to ensure that only data points present in both datasets are retained.  
+
+### 3. Saving Transformed Data  
+- The transformed dataset is saved as `transform_data.csv` in the `/tmp/` directory for further processing and loading into the database.  
 
 ---
 
@@ -93,7 +106,7 @@ The transformation is performed using a **Python-based ETL pipeline**, which inv
 - **Project documentation** including:
   - **README** detailing setup and usage.
   - **Project Plan** outlining the process and timeline.
-  - **Architecture Diagram** (optional, but recommended for visual representation).
+
 
 ---
 
